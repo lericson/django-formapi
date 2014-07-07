@@ -109,6 +109,11 @@ class API(FormView):
             kwargs['api_key'] = self.api_key
         return kwargs
 
+    def get_form(self, *a, **kw):
+        form = super(API, self).get_form(*a, **kw)
+        form.request = self.request
+        return form
+
     def get_access_params(self):
         key = self.request.REQUEST.get('key')
         sign = self.request.REQUEST.get('sign')
